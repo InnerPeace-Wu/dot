@@ -14,6 +14,8 @@ autocmd InsertLeave * :set relativenumber
 
 call plug#begin("~/.config/nvim/bundle")
 " Plugin List
+Plug 'VundleVim/Vundle.vim'
+Plug 'Valloric/YouCompleteMe'
 Plug 'rking/ag.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'Valloric/MatchTagAlways'
@@ -289,6 +291,32 @@ let g:ale_linters = {
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
 let g:ale_python_flake8_options = "--ignore=E501,F401,E226,E741"
+
+" YouCompleteme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_server_use_vim_stdout = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_server_log_level = 'debug'
+"let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py']
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundlesYouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
+let g:ycm_warning_symbol = '?'
+let g:ycm_error_symbol = '?'
+let g:ycm_key_list_select_completion=['space'] 
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_cache_omnifunc=0
+let g:ycm_complete_in_comments=1
+let g:ycm_complete_in_strings = 1
+
+nnoremap <leader>ji :exec("YcmCompleter GoToInclude ")<CR>
+"nnoremap <leader>jd :exec("YcmCompleter GoToDefinition ")<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>jj :exec("YcmCompleter GoToDeclaration ")<CR>
+nnoremap <leader>jf :exec("YcmCompleter GoTo")<CR>
+"nnoremap <leader>jc :exec("YcmCompleter ClearCompilationFlagCache")<CR>
+
 " ---------------------------
 " 精准替换
 " 替换函数。参数说明：

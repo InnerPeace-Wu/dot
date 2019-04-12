@@ -150,6 +150,14 @@ noremap <C-t>l :tabnext<CR>
 noremap <C-t>h :tabprevious<CR>
 noremap <C-t>c :tabclose<CR>
 
+noremap <leader>1 1gt<CR>
+noremap <leader>2 2gt<CR>
+noremap <leader>3 3gt<CR>
+noremap <leader>4 4gt<CR>
+noremap <leader>5 5gt<CR>
+noremap <leader>6 6gt<CR>
+noremap <leader>7 7gt<CR>
+
 set smartcase
 set ignorecase
 set hlsearch

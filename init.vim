@@ -143,6 +143,7 @@ vnoremap <Space> zf
 noremap<leader>e $
 nmap <leader>q :q<CR>
 nmap <leader>w :w<CR>
+nmap <leader>it :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
 
 "swift tab
 noremap <C-t>n :tabnew<CR>
@@ -324,39 +325,6 @@ nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>jj :exec("YcmCompleter GoToDeclaration ")<CR>
 nnoremap <leader>jf :exec("YcmCompleter GoTo")<CR>
 "nnoremap <leader>jc :exec("YcmCompleter ClearCompilationFlagCache")<CR>
-
-" ---------------------------
-" 精准替换
-" 替换函数。参数说明：
-" confirm：是否替换前逐一确认
-" wholeword：是否整词匹配
-" replace：被替换字符串
-" function! Replace(confirm, wholeword, replace)
-"   wa
-"   let flag = ''
-"   if a:confirm
-"     let flag .= 'gec'
-"   else
-"     let flag .= 'ge'
-"   endif
-"   let search = ''
-"   if a:wholeword
-"     let search .= '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
-"   else
-"     let search .= expand('<cword>')
-"   endif
-"   let replace = escape(a:replace, '/\&~')
-"   execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
-" endfunction
-" " 不确认、非整词
-" nnoremap <leader>R :call Replace(0, 0, input('Replace '.expand('<cword>').' with: '))<CR>
-" " 不确认、整词
-" nnoremap <leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-" " 确认、非整词
-" nnoremap <leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
-" " 确认、整词
-" nnoremap <leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-" nnoremap <leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 
 " Load local config if exists
 if filereadable(expand("~/.config/nvim/local.vim"))

@@ -65,14 +65,19 @@ ZSH_THEME_RANDOM_CANDIDATES=(
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# extra plugins: dotenv rake rbenv ruby
 plugins=(
   git
+  sudo
+  brew
   bundler
-  dotenv
   osx
-  rake
-  rbenv
-  ruby
+  thefuck
+  zsh-autosuggestions
+  autojump
+  colored-man-pages
+  brew
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -114,6 +119,22 @@ function auto_tmux_title() {
     printf '\033]2;'"${PWD:t}"'\033\\'
 }
  
-alias vi="nvim"
 auto_tmux_title
 chpwd_functions=(${chpwd_functions[@]} "auto_tmux_title")
+
+# innerpeace
+export PATH=${PATH}:~/git/dot
+alias vi="nvim"
+alias cls='clear'
+alias gcm='git commit'
+alias cpwd='echo `pwd` | pbcopy'
+alias srzsh='source ~/.zshrc'
+
+# linux
+# alias pbcopy='xsel --clipboard --input'
+# alias pbpaste='xsel --clipboard --output'
+
+# mac
+alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sys.argv[1] if len(sys.argv)==2 else \".\"),end=\"\")" $1};function _cpwd(){echo `lsf $1` | pbcopy && echo `pbpaste`}; _cpwd'
+# alias lsf='function _lsf() {python -c "import os,sys; print(os.path.realpath(sys.argv[1]))" $1}; _lsf'
+# alias cpwd='function _cpwd(){if [ $# -gt 0 ] ; then echo `lsf $1` && echo `lsf $1` | pbcopy;else echo `pwd` && echo `pwd` | pbcopy;fi}; _cpwd'

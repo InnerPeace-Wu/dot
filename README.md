@@ -6,6 +6,8 @@ configs for neovim etc.
 * OSX
 ```sh
 brew install neovim
+ln -s ~/dot/init.vim ~/.config/nvim/init.vim
+ln -s ~/dot/ycm_extra_conf.py ~/.config/nvim/ycm_extra_conf.py
 ```
 * Copy `init.vim` to `~/.config/nvim/`
 * Install [vim.plug](https://github.com/junegunn/vim-plug)
@@ -40,9 +42,15 @@ pip3 install -e git+https://gitlab.com/pycqa/flake8@9631dac5#egg=flake8
 ```sh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 chsh -s /bin/zsh
+
+rm ~/.oh-my-zsh/themes/agnoster.zsh-theme
+rm ~/.zshrc
+ln -s ~/dot/agnoster.zsh-theme ~/.oh-my-zsh/themes/agnoster.zsh-theme
+ln -s ~/dot/.zshrc ~/.zshrc
 ```
 
 ## tmux
 ```sh
 brew install tmux
+ln -s ~/dot/.tmux.conf ~/.tmux.conf
 ```

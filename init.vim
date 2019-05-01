@@ -93,7 +93,6 @@ endif
 
 set completeopt=longest,menu " preview
 let g:SuperTabDefaultCompletionType = "<c-n>"
-set clipboard=unnamedplus
 
 if has('mouse')
     set mouse=a
@@ -144,6 +143,11 @@ noremap<leader>e $
 nmap <leader>q :q<CR>
 nmap <leader>w :w<CR>
 nmap <leader>it :r! date "+\%Y-\%m-\%d \%H:\%M:\%S"<CR>
+
+" set clipboard=unnamedplus
+nmap <leader>y "+y
+vmap <leader>y "+y
+nmap <leader>p "+p
 
 "swift tab
 noremap <C-t>n :tabnew<CR>

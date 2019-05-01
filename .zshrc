@@ -114,5 +114,6 @@ function auto_tmux_title() {
     printf '\033]2;'"${PWD:t}"'\033\\'
 }
  
+alias vi="nvim"
 auto_tmux_title
 chpwd_functions=(${chpwd_functions[@]} "auto_tmux_title")

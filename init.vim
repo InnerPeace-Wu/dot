@@ -150,18 +150,18 @@ vmap <leader>y "+y
 nmap <leader>p "+p
 
 "swift tab
-noremap <C-t>n :tabnew<CR>
-noremap <C-t>l :tabnext<CR>
-noremap <C-t>h :tabprevious<CR>
-noremap <C-t>c :tabclose<CR>
+nmap <C-t>n :tabnew<CR>
+nmap <C-t>l :tabnext<CR>
+nmap <C-t>h :tabprevious<CR>
+nmap <C-t>c :tabclose<CR>
 
-noremap <leader>1 1gt<CR>
-noremap <leader>2 2gt<CR>
-noremap <leader>3 3gt<CR>
-noremap <leader>4 4gt<CR>
-noremap <leader>5 5gt<CR>
-noremap <leader>6 6gt<CR>
-noremap <leader>7 7gt<CR>
+nmap <leader>1 1gt<CR>
+nmap <leader>2 2gt<CR>
+nmap <leader>3 3gt<CR>
+nmap <leader>4 4gt<CR>
+nmap <leader>5 5gt<CR>
+nmap <leader>6 6gt<CR>
+nmap <leader>7 7gt<CR>
 
 set smartcase
 set ignorecase

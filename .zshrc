@@ -123,12 +123,13 @@ auto_tmux_title
 chpwd_functions=(${chpwd_functions[@]} "auto_tmux_title")
 
 # innerpeace
-export PATH=${PATH}:~/git/dot
+export PATH=${PATH}:~/innerpeace/bin
 alias vi="nvim"
 alias cls='clear'
 alias gcm='git commit'
-alias cpwd='echo `pwd` | pbcopy'
 alias srzsh='source ~/.zshrc'
+alias vizsh='nvim ~/.zshrc'
+alias vivim='nvim ~/.config/nvim/init.vim'
 
 # linux
 # alias pbcopy='xsel --clipboard --input'
@@ -138,3 +139,6 @@ alias srzsh='source ~/.zshrc'
 alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sys.argv[1] if len(sys.argv)==2 else \".\"),end=\"\")" $1};function _cpwd(){echo `lsf $1` | pbcopy && echo `pbpaste`}; _cpwd'
 # alias lsf='function _lsf() {python -c "import os,sys; print(os.path.realpath(sys.argv[1]))" $1}; _lsf'
 # alias cpwd='function _cpwd(){if [ $# -gt 0 ] ; then echo `lsf $1` && echo `lsf $1` | pbcopy;else echo `pwd` && echo `pwd` | pbcopy;fi}; _cpwd'
+
+# X server
+export DISPLAY="127.0.0.1:10.0"

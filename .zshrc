@@ -142,3 +142,12 @@ alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sy
 
 # X server
 export DISPLAY="127.0.0.1:10.0"
+
+# autosuggestions
+bindkey '^b' forward-word
+# bindkey '^a' autosuggest-accept
+# Remove forward-char widgets from ACCEPT
+# ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
+
+# Add forward-char widgets to PARTIAL_ACCEPT
+# ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)

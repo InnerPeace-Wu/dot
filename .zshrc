@@ -2,16 +2,16 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/joe/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="agnoster_diy"
 
 ZSH_THEME_RANDOM_CANDIDATES=(
   "robbyrussell"
-  "agnoster"
+  "agnoster_diy"
   )
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -77,7 +77,7 @@ plugins=(
   autojump
   colored-man-pages
   brew
-  zsh-syntax-highlighting
+  # zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -151,3 +151,4 @@ bindkey '^b' forward-word
 
 # Add forward-char widgets to PARTIAL_ACCEPT
 # ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
+source $HOME/git/third_party/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

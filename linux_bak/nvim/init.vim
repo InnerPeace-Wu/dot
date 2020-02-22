@@ -1,4 +1,4 @@
-let g:python_host_prog='/usr/local/bin/python'
+let g:python_host_prog='/usr/bin/python3'
 
 set nocompatible
 filetype off
@@ -14,15 +14,13 @@ autocmd InsertLeave * :set relativenumber
 
 call plug#begin("~/.config/nvim/bundle")
 " Plugin List
-Plug 'VundleVim/Vundle.vim'
-Plug 'Valloric/YouCompleteMe'
+Plug 'bigeagle/molokai'
 Plug 'rking/ag.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'Valloric/MatchTagAlways'
-Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
+"Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 
 Plug 'majutsushi/tagbar'
 Plug 'jrosiek/vim-mark'
@@ -34,18 +32,15 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'zaiste/tmux.vim'
 Plug 'lepture/vim-jinja'
 Plug 'cespare/vim-toml'
-Plug 'isRuslan/vim-es6'
-Plug 'zxqfl/tabnine-vim'
-" Plug 'elzr/vim-json'
-
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf'
 Plug 'Raimondi/delimitMate'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-json', {'do': 'npm install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'do': 'npm install --frozen-lockfile'}
+Plug 'neoclide/coc-highlight', {'do': 'npm install --frozen-lockfile'}
+Plug 'neoclide/coc-lists', {'do': 'npm install --frozen-lockfile'}
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
-Plug 'Shougo/echodoc.vim'
-Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 
 Plug 'tpope/vim-commentary'
@@ -53,28 +48,16 @@ Plug 'kien/ctrlp.vim'
 Plug 'tell-k/vim-autopep8'
 Plug 'jrosiek/vim-mark'
 Plug 'airblade/vim-gitgutter'
-" Plug 'roxma/vim-tmux-clipboard'
-" Plug 'https://github.com/tpope/vim-commentary.git'
 call plug#end()
 
 " UI
-" color theme
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set background=dark
-set t_Co=256
-let g:rehash256 = 1
-let g:solarized_termcolors=256
-let g:molokai_original = 1
-" colorscheme solarized
-colorscheme molokai
-let g:Powerline_colorscheme='solarized256'
-" if !exists("g:vimrc_loaded")
-" 	if has("nvim")
-" 		set termguicolors
-" 	endif
-" 	let g:molokai_original = 1
-" 	colorscheme molokai
-" endif " exists(...)
+if !exists("g:vimrc_loaded")
+	if has("nvim")
+		set termguicolors
+	endif
+	let g:molokai_original = 1
+	colorscheme molokai
+endif " exists(...)
 
 set so=10
 set number
@@ -94,7 +77,6 @@ endif
 
 set completeopt=longest,menu " preview
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
 if has('mouse')
     set mouse=a
     set selectmode=mouse,key
@@ -176,8 +158,7 @@ nmap j gj
 nmap k gk
 
 nmap T :tabnew<cr>
-noremap <leader>hl :set hlsearch! hlsearch?<CR>
-
+nmap <leader>hl :set hlsearch! hlsearch?<CR>
 au FileType c,cpp,h,java,css,js,nginx,scala,go inoremap  <buffer>  {<CR> {<CR>}<Esc>O
 
 au BufNewFile *.py call ScriptHeader()
@@ -185,7 +166,7 @@ au BufNewFile *.sh call ScriptHeader()
 
 function ScriptHeader()
     if &filetype == 'python'
-        let header = "#!/usr/bin/env mdl"
+        let header = "#!/usr/bin/env python3"
         let cfg = "# vim: ts=4 sw=4 sts=4 expandtab"
     elseif &filetype == 'sh'
         let header = "#!/bin/bash"
@@ -209,35 +190,87 @@ nmap tb :TagbarToggle<cr>
 let g:localvimrc_ask=0
 let g:localvimrc_sandbox=0
 
-au FileType json setlocal conceallevel=0
+autocmd Filetype json let g:indentLine_enabled = 0
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_noConcealCursor=""
 
-" - Airline -------------------
+" - Lightline -------------------
 set noshowmode
 set laststatus=2
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_powerline_fonts = 1
+let g:lightline = {
+	\   'active': {
+	\     'left':[ [ 'mode', 'paste' ],
+	\              [ 'cocstatus', 'readonly', 'filename', 'modified' ]
+	\     ]
+	\   },
+	\   'component': {
+	\     'lineinfo': ' %3l:%-2v',
+	\   },
+	\ 'component_function': {
+	\   'cocstatus': 'coc#status',
+	\ },
+	\ }
+let g:lightline.separator = {
+	\   'left': '', 'right': ''
+	\}
+let g:lightline.subseparator = {
+	\   'left': '', 'right': '' 
+	\}
+
 " ----------------------------
 
-" Deoplete and echodoc
-set noshowmode
-let g:echodoc#enable_at_startup = 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#sources#jedi#python_path = "/usr/local/bin/python3"
-let g:deoplete#sources#jedi#extra_path = split($PYTHONPATH, ":")
+" Completion and echodoc
+set shortmess+=c
+set updatetime=300
+set signcolumn=yes
+set completeopt=noinsert,menuone,noselect
 
-let g:deoplete#sources = {}
-let g:deoplete#sources.python = ['jedi']
- 
-inoremap <silent><expr> <C-x><C-o> deoplete#mappings#manual_complete("jedi")
-inoremap <expr> <C-o> pumvisible() ? "\<C-n>" : "\<C-o>"
+let g:coc_auto_copen=1
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <leader><space> coc#refresh()
+
+
+"nmap <silent> <leader>g <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> <leader>d <Plug>(coc-declaration)
+nmap <silent> <leader>g <Plug>(coc-definition)
+nmap <silent> <leader>i <Plug>(coc-implementation)
+nmap <silent> <leader>u <Plug>(coc-references)
+nmap <silent> <leader>rn <Plug>(coc-rename)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <c-p> :CocList<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+highlight CocErrorSign ctermfg=215 guifg=#ffaf5f
+highlight default CocHighlightText guibg=#767676 ctermbg=243 cterm=underline
+
 " ----------------------------
 
 " - NerdTree -----------------
-nmap <leader>tt :NERDTreeToggle<cr>
+nmap tt :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=0
 let NERDTreeMouseMode=2
 
@@ -248,26 +281,10 @@ let NERDTreeDirArrows=1
 " ----------------------------
 
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
-
 " - python and jedi ----------
 let python_highlight_all = 1
 autocmd BufWritePre *.py :%s/\s\+$//e
 au FileType python setlocal cc=80
-
-let g:jedi#force_py_version=3
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#use_tabs_not_buffers = 1
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#goto_command = "<leader>g"
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#usages_command = "<leader>u"
-let g:jedi#show_call_signatures_delay = 100
-let g:jedi#completions_enabled = 0
 " ----------------------------
 
 " - rainbow_parentheses ------
@@ -290,7 +307,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax c,cpp,go,h,java,python,javascript,scala,coffee RainbowParenthesesLoadSquare
 au Syntax c,cpp,go,h,java,python,javascript,scala,coffee,scss  RainbowParenthesesLoadBraces
 " ----------------------------
-
 " - ALE ---------------------
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
@@ -305,32 +321,6 @@ let g:ale_linters = {
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
 let g:ale_python_flake8_options = "--ignore=E501,F401,E226,E741"
-
-" YouCompleteme
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_server_use_vim_stdout = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_server_log_level = 'debug'
-"let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py']
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundlesYouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-" let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm_extra_conf.py'
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
-let g:ycm_warning_symbol = '?'
-let g:ycm_error_symbol = '?'
-let g:ycm_key_list_select_completion=['space'] 
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_cache_omnifunc=0
-let g:ycm_complete_in_comments=1
-let g:ycm_complete_in_strings = 1
-
-nnoremap <leader>ji :exec("YcmCompleter GoToInclude ")<CR>
-"nnoremap <leader>jd :exec("YcmCompleter GoToDefinition ")<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>jj :exec("YcmCompleter GoToDeclaration ")<CR>
-nnoremap <leader>jf :exec("YcmCompleter GoTo")<CR>
-"nnoremap <leader>jc :exec("YcmCompleter ClearCompilationFlagCache")<CR>
-
 " Load local config if exists
 if filereadable(expand("~/.config/nvim/local.vim"))
 	source ~/.vim/config/local.vim

@@ -2,18 +2,20 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+  export ZSH="~/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="theunraveler"
 ZSH_THEME="agnoster_diy"
 
 ZSH_THEME_RANDOM_CANDIDATES=(
   "robbyrussell"
   "agnoster_diy"
   )
-# Set list of themes to load
+
+# Set list of ahemes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
 # looking in ~/.oh-my-zsh/themes/
@@ -52,10 +54,7 @@ ZSH_THEME_RANDOM_CANDIDATES=(
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -72,9 +71,9 @@ plugins=(
   brew
   bundler
   osx
-  thefuck
+  # thefuck
   zsh-autosuggestions
-  autojump
+  # autojump
   colored-man-pages
   brew
   # zsh-syntax-highlighting
@@ -130,10 +129,15 @@ alias gcm='git commit'
 alias srzsh='source ~/.zshrc'
 alias vizsh='nvim ~/.zshrc'
 alias vivim='nvim ~/.config/nvim/init.vim'
+alias mdl='python3'
+alias diff="diff-so-fancy"
+alias cat="bat"
 
 # linux
-# alias pbcopy='xsel --clipboard --input'
-# alias pbpaste='xsel --clipboard --output'
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+# alias pbcopy='xclip -selection clipboard'
+# alias pbpaste='xclip -selection clipboard -o'
 
 # mac
 alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sys.argv[1] if len(sys.argv)==2 else \".\"),end=\"\")" $1};function _cpwd(){echo `lsf $1` | pbcopy && echo `pbpaste`}; _cpwd'
@@ -141,9 +145,10 @@ alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sy
 # alias cpwd='function _cpwd(){if [ $# -gt 0 ] ; then echo `lsf $1` && echo `lsf $1` | pbcopy;else echo `pwd` && echo `pwd` | pbcopy;fi}; _cpwd'
 
 # X server
-# export DISPLAY="127.0.0.1:11.0"
+export DISPLAY="127.0.0.1:10.0"
 # export DISPLAY=:0
-# export DISPLAY=localhost:0
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # autosuggestions
 bindkey '^b' forward-word
@@ -153,4 +158,29 @@ bindkey '^b' forward-word
 
 # Add forward-char widgets to PARTIAL_ACCEPT
 # ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
-source $HOME/git/third_party/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.profile
+
+export PATH="$PATH:$HOME/bin"
+export EDITOR=nvim
+# . /usr/share/autojump/autojump.sh
+[[ -s /home//.autojump/etc/profile.d/autojump.sh ]] && source /home//.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
+# innerpeace
+source $HOME/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# oss completion
+
+while1(){
+	command=$@
+	if [[ $command == make\ * ]]; then
+			command=`$@ -n`
+			echo $command
+	fi
+	while true;do
+					eval $command
+	if [ $? = 233 ];then
+					break
+	fi
+					sleep 10
+	done
+}

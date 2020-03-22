@@ -14,7 +14,7 @@ pip3 install flake8 autopep8 jedi
 ```
 
 ```
-ln -s path/to/neovim-config ~/.config/nvim
+ln -s path/to/nvim ~/.config/nvim
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```

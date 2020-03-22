@@ -72,12 +72,12 @@ plugins=(
   brew
   bundler
   osx
-  thefuck
+  # thefuck
   zsh-autosuggestions
-  autojump
+  # autojump
   colored-man-pages
   brew
-  # zsh-syntax-highlighting
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -132,8 +132,8 @@ alias vizsh='nvim ~/.zshrc'
 alias vivim='nvim ~/.config/nvim/init.vim'
 
 # linux
-# alias pbcopy='xsel --clipboard --input'
-# alias pbpaste='xsel --clipboard --output'
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
 
 # mac
 alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sys.argv[1] if len(sys.argv)==2 else \".\"),end=\"\")" $1};function _cpwd(){echo `lsf $1` | pbcopy && echo `pbpaste`}; _cpwd'
@@ -143,7 +143,7 @@ alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sy
 # X server
 # export DISPLAY="127.0.0.1:11.0"
 # export DISPLAY=:0
-# export DISPLAY=localhost:0
+export DISPLAY=localhost:0
 
 # autosuggestions
 bindkey '^b' forward-word
@@ -153,4 +153,4 @@ bindkey '^b' forward-word
 
 # Add forward-char widgets to PARTIAL_ACCEPT
 # ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
-source $HOME/git/third_party/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $HOME/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

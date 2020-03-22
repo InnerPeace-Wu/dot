@@ -2,29 +2,8 @@
 configs for neovim etc.
 
 ## neovim
-
-### ubuntu
-
 * Linux install [tutorial](https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu)
-```sh
-sudo apt-get install neovim
-sudo apt-get install ctags
-pip3 install neovim
-pip3 install flake8 autopep8 jedi
-```
-
-```
-ln -s path/to/neovim-config ~/.config/nvim
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-run `nvim` then run `:PlugInstall` 
-
-
-### OSX
-
-**NOTE**: not updated for a long time.
-
+* OSX
 ```sh
 brew install neovim
 ln -s ~/dot/init.vim ~/.config/nvim/init.vim
@@ -61,17 +40,17 @@ pip3 install -e git+https://gitlab.com/pycqa/flake8@9631dac5#egg=flake8
 ## zsh
 * [repo](https://github.com/robbyrussell/oh-my-zsh)
 ```sh
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+chsh -s /bin/zsh
 
-ln -snf ~/dot/agnoster_diy.zsh-theme ~/.oh-my-zsh/themes/
-ln -snf ~/dot/.zshrc ~/.zshrc
+rm ~/.oh-my-zsh/themes/agnoster.zsh-theme
+rm ~/.zshrc
+ln -s ~/dot/agnoster.zsh-theme ~/.oh-my-zsh/themes/agnoster.zsh-theme
+ln -s ~/dot/.zshrc ~/.zshrc
 ```
 
 ## tmux
 ```sh
-# mac
 brew install tmux
-# ubuntu
-sudo apt-get install tmux
-ln -snf ~/dot/.tmux.conf ~/.tmux.conf
+ln -s ~/dot/.tmux.conf ~/.tmux.conf
 ```

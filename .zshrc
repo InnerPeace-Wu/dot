@@ -130,6 +130,8 @@ alias gcm='git commit'
 alias srzsh='source ~/.zshrc'
 alias vizsh='nvim ~/.zshrc'
 alias vivim='nvim ~/.config/nvim/init.vim'
+alias mdl='python3'
+# alias proxy='export http_proxy=http://127.0.0.1:10887;export https_proxy=http://127.0.0.1:10887;'
 
 # linux
 # alias pbcopy='xsel --clipboard --input'

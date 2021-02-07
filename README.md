@@ -7,10 +7,11 @@ configs for neovim etc.
 
 * Linux install [tutorial](https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu)
 ```sh
-sudo apt-get install neovim
-sudo apt-get install ctags
-pip3 install neovim
-pip3 install flake8 autopep8 jedi
+sudo add-apt-repository ppa:neovim-ppa/stable 
+sudo apt-get update 
+
+sudo apt-get install neovim ctags
+pip3 install flake8 autopep8 jedi neovim doq
 ```
 
 ```
@@ -63,6 +64,12 @@ pip3 install -e git+https://gitlab.com/pycqa/flake8@9631dac5#egg=flake8
 ```sh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 ln -snf ~/dot/agnoster_diy.zsh-theme ~/.oh-my-zsh/themes/
 ln -snf ~/dot/.zshrc ~/.zshrc
 ```
@@ -71,6 +78,7 @@ ln -snf ~/dot/.zshrc ~/.zshrc
 ```sh
 # mac
 brew install tmux
+
 # ubuntu
 sudo apt-get install tmux
 ln -snf ~/dot/.tmux.conf ~/.tmux.conf

@@ -1,4 +1,5 @@
-let g:python_host_prog='/usr/bin/python3'
+let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
 
 set nocompatible
 filetype off
@@ -93,11 +94,16 @@ Plug '~/.nvim/bundle/colorpicker'
 " innerpeace plug
 Plug 'tpope/vim-commentary'
 Plug 'tell-k/vim-autopep8'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 call plug#end()
 
 " innerpeace config
 let g:go_version_warning = 0
 let mapleader=";"
+
+let g:pydocstring_doq_path = "/usr/local/bin/doq"
+let g:pydocstring_formatter = 'google'
+
 
 set relativenumber number " 相对行号
 au FocusLost * :set norelativenumber number
@@ -247,7 +253,7 @@ au FileType vue syntax sync minlines=500
 
 function ScriptHeader()
     if &filetype == 'python'
-        let header = "#!/usr/bin/env python"
+        let header = "#!/usr/bin/env python3"
         let cfg = "# vim: ts=4 sw=4 sts=4 expandtab"
     elseif &filetype == 'sh'
         let header = "#!/bin/bash"

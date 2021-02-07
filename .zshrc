@@ -131,6 +131,7 @@ alias srzsh='source ~/.zshrc'
 alias vizsh='nvim ~/.zshrc'
 alias vivim='nvim ~/.config/nvim/init.vim'
 alias mdl='python3'
+alias pip3='/usr/bin/python3.7 -m pip'
 # alias proxy='export http_proxy=http://127.0.0.1:10887;export https_proxy=http://127.0.0.1:10887;'
 
 # linux
@@ -146,6 +147,13 @@ alias cpwd='function lsf() {python3 -c "import os,sys; print(os.path.realpath(sy
 # export DISPLAY="127.0.0.1:11.0"
 # export DISPLAY=:0
 export DISPLAY=localhost:0
+export TERM="xterm-256color"
+
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
 
 # autosuggestions
 bindkey '^b' forward-word
@@ -156,3 +164,5 @@ bindkey '^b' forward-word
 # Add forward-char widgets to PARTIAL_ACCEPT
 # ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
 # source $HOME/git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
